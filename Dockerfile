@@ -1,16 +1,5 @@
 FROM node:18-alpine
-
-# Installiamo globalmente le dipendenze necessarie
-RUN npm install -g @shopify/dev-mcp @latitude-data/supergateway
-
-# Imposta la porta su cui il server ascolterà (Render la passerà come env PORT)
+RUN npm i -g @shopify/dev-mcp @latitude-data/supergateway
 ENV PORT=8802
-
-# Comando di avvio:
-# - @latitude-data/supergateway fa da bridge MCP <-> WebSocket
-# - "--ws" attiva WebSocket (che n8n può usare)
-# - "npx @shopify/dev-mcp" lancia il server Shopify MCP
-CMD ["sh", "-c", "npx @latitude-data/supergateway --ws --port $PORT 'npx @shopify/dev-mcp'"]
-
-# Espone la porta per Render
+CMD sh -c 'npx -y @latitude-data/supergateway --stdio "npx -y @shopify/dev-mcp@latest" --port $PORT'
 EXPOSE 8802
