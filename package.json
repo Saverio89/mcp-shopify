@@ -1,0 +1,12 @@
+{
+  "name": "shopify-mcp-http-bridge",
+  "version": "1.0.0",
+  "description": "Bridge HTTP per MCP server Shopify su Render",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
