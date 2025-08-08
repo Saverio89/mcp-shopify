@@ -1,14 +1,12 @@
-import express from "express";
-import { spawn } from "child_process";
+const express = require("express");
+const { spawn } = require("child_process");
 
 const app = express();
 app.use(express.json({ limit: "10mb" }));
 
 app.post("/mcp", (req, res) => {
-  // Avvia MCP server Shopify in stdio mode
   const child = spawn("npx", ["-y", "@shopify/dev-mcp@latest"], { stdio: ["pipe", "pipe", "inherit"] });
 
-  // Invia i dati in input al processo MCP
   child.stdin.write(JSON.stringify(req.body));
   child.stdin.end();
 
